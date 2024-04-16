@@ -7,9 +7,9 @@
 			rel="stylesheet"
 			href="https://kit.fontawesome.com/8d12afa6e5.css"
 			crossorigin="anonymous" />
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
 		<script src="src/js/index.js" defer></script>
-		<title>WhispR | Login</title>
+		<title>WhispR | Registration</title>
 	</head>
 	<body class="bg-white dark:bg-darkBlue font-opensans">
 		<!-- Global container -->
@@ -21,13 +21,11 @@
 				<div
 					class="flex flex-col items-center justify-center px-6 py-1 md:py-11 bg-greenPrimary text-white text-center">
 					<h1 class="mt-10 font-bold text-3xl">Welcome!</h1>
-					<p class="my-6 md:my-10">
-						New to WhispR? <span class="block">Get started by signing up!</span>
-					</p>
+					<p class="my-6 md:my-10">Already have an account?</p>
 					<a
-						href="/profile/registration/"
+						href="/"
 						class="mb-10 py-3 px-6 font-sans border border-almostWhite rounded-full uppercase hover:shadow-xl hover:bg-almostWhite hover:text-greenPrimary">
-						Sign up
+						Log in
 					</a>
 				</div>
 
@@ -35,9 +33,20 @@
 				<div
 					class="flex flex-grow flex-col items-center justify-center px-12 py-1 md:py-11 bg-desertTan text-center">
 					<h2 class="mt-10 text-greenPrimary font-bold text-3xl">
-						Log in to WhispR
+						Sign up to WhispR
 					</h2>
 					<form action="/profile" class="w-full my-6 md:my-10">
+						<div
+							class="w-full flex items-center my-2 p-2 text-darkBlue bg-white border border-gray-200 rounded-md group focus-within:border-greenPrimary">
+							<i class="fa-solid fa-user text-gray-400"></i>
+							<input
+								type="text"
+								minlength="3"
+								required
+								title="Your username must be at least 3 characters long"
+								class="pl-2 w-full border-none focus:outline-none"
+								placeholder="Username" />
+						</div>
 						<div
 							class="w-full flex items-center my-2 p-2 text-darkBlue bg-white border border-gray-200 rounded-md group focus-within:border-greenPrimary">
 							<i class="fa-solid fa-envelope text-gray-400"></i>
@@ -61,14 +70,10 @@
 								class="pl-2 w-full border-none focus:outline-none"
 								placeholder="Password" />
 						</div>
-
-						<a href="#" class="text-gray-500 hover:text-gray-800 underline"
-							>Forgot your password?</a
-						>
 						<button
 							type="submit"
 							class="w-full my-10 py-3 px-5 font-sans bg-greenPrimary shadow-md hover:shadow-xl hover:bg-almostWhite text-almostWhite hover:text-greenPrimary border hover:border-greenPrimary rounded-full uppercase">
-							Log in
+							Sign up
 						</button>
 					</form>
 				</div>
