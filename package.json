@@ -1,0 +1,33 @@
+{
+	"name": "WhispR",
+	"version": "0.0.1",
+	"description": "CA for the CSS Frameworks course at Noroff",
+	"main": "index.js",
+	"scripts": {
+		"build": "tailwindcss -i ./input.css -o ./css/style.css",
+		"watch": "tailwindcss -i ./input.css -o ./css/style.css --watch",
+		"start": "live-server",
+		"dev": "npm-run-all --parallel watch start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ttowntom/noroff-css-frameworks.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ttowntom/noroff-css-frameworks#issues"
+	},
+	"homepage": "https://github.com/ttowntom/noroff-css-frameworks#readme",
+	"keywords": [
+		"CSS",
+		"Frameworks",
+		"Tailwind",
+		"TailwindCSS"
+	],
+	"author": "Torgeir Helgesen Riseth <torris51469@stud.noroff.no>",
+	"license": "ISC",
+	"devDependencies": {
+		"live-server": "^1.2.2",
+		"npm-run-all": "^4.1.5",
+		"tailwindcss": "^3.4.1"
+	}
+}
