@@ -8,7 +8,7 @@
 			href="https://kit.fontawesome.com/8d12afa6e5.css"
 			crossorigin="anonymous" />
 		<link rel="stylesheet" href="css/style.css" />
-		<script src="src/js/index.js" defer></script>
+		<script src="src/js/index.js" type="module"></script>
 		<title>WhispR | Login</title>
 	</head>
 	<body class="bg-white dark:bg-darkBlue font-opensans">
@@ -37,13 +37,17 @@
 					<h2 class="mt-10 text-greenPrimary font-bold text-3xl">
 						Log in to WhispR
 					</h2>
-					<form action="/profile" class="w-full my-6 md:my-10">
+					<form
+						id="loginForm"
+						method="post"
+						action="/auth/login"
+						class="w-full my-6 md:my-10">
 						<div
 							class="w-full flex items-center my-2 p-2 text-darkBlue bg-white border border-gray-200 rounded-md group focus-within:border-greenPrimary">
 							<i class="fa-solid fa-envelope text-gray-400"></i>
 							<input
+								name="email"
 								type="email"
-								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
 								required
 								title="Please enter a valid email address"
 								class="pl-2 w-full border-none focus:outline-none"
@@ -54,6 +58,7 @@
 							<i class="fa-solid fa-lock text-gray-400"></i>
 
 							<input
+								name="password"
 								type="password"
 								pattern=".{8,}"
 								required

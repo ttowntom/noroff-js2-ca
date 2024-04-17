@@ -8,7 +8,7 @@
 			href="https://kit.fontawesome.com/8d12afa6e5.css"
 			crossorigin="anonymous" />
 		<link rel="stylesheet" href="../../css/style.css" />
-		<script src="src/js/index.js" defer></script>
+		<script src="../../src/js/index.js" type="module"></script>
 		<title>WhispR | Registration</title>
 	</head>
 	<body class="bg-white dark:bg-darkBlue font-opensans">
@@ -35,26 +35,32 @@
 					<h2 class="mt-10 text-greenPrimary font-bold text-3xl">
 						Sign up to WhispR
 					</h2>
-					<form action="/profile" class="w-full my-6 md:my-10">
+					<form
+						id="registrationForm"
+						method="post"
+						action="/auth/register"
+						class="w-full my-6 md:my-10">
 						<div
 							class="w-full flex items-center my-2 p-2 text-darkBlue bg-white border border-gray-200 rounded-md group focus-within:border-greenPrimary">
 							<i class="fa-solid fa-user text-gray-400"></i>
 							<input
+								name="name"
 								type="text"
-								minlength="3"
+								maxlength="20"
 								required
-								title="Your username must be at least 3 characters long"
+								title="Your name must be less than 20 characters long"
 								class="pl-2 w-full border-none focus:outline-none"
-								placeholder="Username" />
+								placeholder="Name" />
 						</div>
 						<div
 							class="w-full flex items-center my-2 p-2 text-darkBlue bg-white border border-gray-200 rounded-md group focus-within:border-greenPrimary">
 							<i class="fa-solid fa-envelope text-gray-400"></i>
 							<input
+								name="email"
 								type="email"
-								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+								pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
 								required
-								title="Please enter a valid email address"
+								title="Please enter a valid email address. Must be a Noroff email address."
 								class="pl-2 w-full border-none focus:outline-none"
 								placeholder="Email" />
 						</div>
@@ -63,8 +69,9 @@
 							<i class="fa-solid fa-lock text-gray-400"></i>
 
 							<input
+								name="password"
 								type="password"
-								pattern=".{8,}"
+								minlength="8"
 								required
 								title="Password must be at least 8 characters long"
 								class="pl-2 w-full border-none focus:outline-none"
