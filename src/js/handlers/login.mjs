@@ -13,6 +13,10 @@ export function setLoginFormListener() {
 			const action = form.action;
 			const method = form.method;
 
+			// Hide error message, if any
+			const errContainer = document.querySelector(`#loginErrorContainer`);
+			errContainer.classList.add("hidden");
+
 			// Send to API
 			login(profile, action, method);
 		});

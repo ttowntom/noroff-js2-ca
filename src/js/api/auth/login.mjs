@@ -6,18 +6,39 @@ export async function login(profile, action, method) {
 	const loginURL = `${API_BASE_URL}${actionURL.pathname}`;
 	const body = JSON.stringify(profile);
 
-	const response = await fetch(loginURL, {
-		method,
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body,
-	});
+	let response;
+	try {
+		response = await fetch(loginURL, {
+			method,
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body,
+		});
 
-	const data = await response.json();
-	const { accessToken, ...user } = data.data;
+		// Handle error
+		if (!response.ok) {
+			const errorData = await response.json();
+			const errContainer = document.querySelector(`#loginErrorContainer`);
+			const errMsg = document.querySelector(`#loginError`);
 
-	// Save to local storage
-	storage.save("token", accessToken);
-	storage.save("profile", user);
+			errContainer.classList.remove("hidden");
+			errContainer.classList.add("flex");
+			if (errorData) {
+				errMsg.textContent = errorData.errors[0].message;
+			} else {
+				errMsg.textContent = error.message;
+			}
+		}
+
+		// Handle success
+		const data = await response.json();
+		const { accessToken, ...user } = data.data;
+
+		// Save to local storage
+		storage.save("token", accessToken);
+		storage.save("profile", user);
+	} catch (error) {
+		throw new Error(error);
+	}
 }
