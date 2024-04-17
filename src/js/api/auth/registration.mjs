@@ -14,5 +14,5 @@ export async function register(profile, action, method) {
 	});
 
 	const result = await response.json();
-	console.log(result);
+	return result;
 }
