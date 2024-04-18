@@ -3,6 +3,7 @@ import { setLoginFormListener } from "./handlers/login.mjs";
 import { setLogoutListener } from "./handlers/logout.mjs";
 
 import * as post from "./api/posts/index.mjs";
+import * as templates from "./templates/index.mjs";
 
 import { themeSelector } from "./ui/themeSelector.js";
 import { userMenuProfile, closeUserMenuProfile } from "./ui/userMenuProfile.js";
@@ -23,13 +24,34 @@ if (path === "/") {
 	userMenuProfile();
 	closeUserMenuProfile();
 
+	// Open/Close user menu on posts
+	userMenuPost();
+	closeUserMenuPost();
+
 	// Set logout listener
 	setLogoutListener();
+} else if (path === "/feed/") {
+	// Set theme
+	themeSelector();
+
+	// Render posts
+	async function renderPosts() {
+		const feedContainer = document.querySelector("#feed");
+		const posts = await post.getPosts();
+		posts.data.forEach((postData) => {
+			templates.renderPostTemplate(postData, feedContainer);
+		});
+	}
+	renderPosts();
+
+	// Open/Close user menu on posts
+	userMenuPost();
+	closeUserMenuPost();
 } else {
 	// Set theme
 	themeSelector();
 
-	// Open/Close on posts
+	// Open/Close user menu on posts
 	userMenuPost();
 	closeUserMenuPost();
 }

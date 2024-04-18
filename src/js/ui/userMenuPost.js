@@ -1,6 +1,6 @@
-const openBtn = document.querySelector("#user-menu-post-button");
-const userMenu = document.querySelector("#user-menu-post");
-const closeBtn = document.querySelector("#user-menu-post-close-btn");
+const openBtn = document.querySelector(".userMenuPostButton");
+const userMenu = document.querySelector(".userMenuPost");
+const closeBtn = document.querySelector(".userMenuPostCloseBtn");
 
 export function userMenuPost() {
 	openBtn.addEventListener("click", openMenu);
