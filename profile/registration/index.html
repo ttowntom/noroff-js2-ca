@@ -41,6 +41,12 @@
 						action="/auth/register"
 						class="w-full my-6 md:my-10">
 						<div
+							id="registerErrorContainer"
+							class="hidden w-full items-center my-2 p-2 text-darkBlue bg-red-300 border border-red-600 rounded-md">
+							<i class="fa-solid fa-circle-exclamation text-red-700"></i>
+							<p id="registerError" class="pl-2 text-left"></p>
+						</div>
+						<div
 							class="w-full flex items-center my-2 p-2 text-darkBlue bg-white border border-gray-200 rounded-md group focus-within:border-greenPrimary">
 							<i class="fa-solid fa-user text-gray-400"></i>
 							<input
