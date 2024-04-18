@@ -22,6 +22,7 @@ export async function login(profile, action, method) {
 			const errContainer = document.querySelector(`#loginErrorContainer`);
 			const errMsg = document.querySelector(`#loginError`);
 
+			// Show error message
 			errContainer.classList.remove("hidden");
 			errContainer.classList.add("flex");
 			if (errorData) {
@@ -38,6 +39,9 @@ export async function login(profile, action, method) {
 		// Save to local storage
 		storage.save("token", accessToken);
 		storage.save("profile", user);
+
+		// Redirect
+		window.location.href = "/profile";
 	} catch (error) {
 		throw new Error(error);
 	}
