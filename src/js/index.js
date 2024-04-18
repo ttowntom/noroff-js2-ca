@@ -1,5 +1,6 @@
 import { setRegistrationFormListener } from "./handlers/registration.mjs";
 import { setLoginFormListener } from "./handlers/login.mjs";
+import { setLogoutListener } from "./handlers/logout.mjs";
 
 import * as post from "./api/posts/index.mjs";
 
@@ -21,6 +22,9 @@ if (path === "/") {
 	// Open/Close user menu on profile
 	userMenuProfile();
 	closeUserMenuProfile();
+
+	// Set logout listener
+	setLogoutListener();
 } else {
 	// Set theme
 	themeSelector();
