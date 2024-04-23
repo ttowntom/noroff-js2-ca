@@ -212,7 +212,7 @@ export function postTemplate(postData) {
 
 	// Create post content
 	const content = document.createElement("p");
-	content.classList.add("mt-3", "dark:text-gray-200");
+	content.classList.add("mt-3", "dark:text-gray-200", "break-words");
 	content.textContent = postData.body;
 	post.append(content);
 
