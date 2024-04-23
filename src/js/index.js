@@ -1,6 +1,7 @@
 import { setRegistrationFormListener } from "./handlers/registration.mjs";
 import { setLoginFormListener } from "./handlers/login.mjs";
 import { setLogoutListener } from "./handlers/logout.mjs";
+import { setPostFormListener } from "./handlers/post.mjs";
 
 import * as post from "./api/posts/index.mjs";
 import * as templates from "./templates/index.mjs";
@@ -42,11 +43,11 @@ if (path === "/") {
 			templates.renderPostTemplate(postData, feedContainer);
 		});
 	}
-	renderPosts();
 
-	// Open/Close user menu on posts
-	// userMenuPost();
-	// closeUserMenuPost();
+	// Set post POST form listener
+	setPostFormListener();
+
+	renderPosts();
 } else {
 	// Set theme
 	themeSelector();

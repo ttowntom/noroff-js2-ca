@@ -129,11 +129,11 @@
 							</div>
 
 							<!-- Input form  -->
-							<form class="flex flex-col">
+							<form id="postForm" class="flex flex-col">
 								<!-- Textarea  -->
 								<textarea
-									name="post"
-									id="post"
+									name="body"
+									id="postBody"
 									class="w-full p-3 focus:outline-none dark:bg-slate-800 text-darkBlue dark:text-gray-200"
 									placeholder="Give us an update!"></textarea>
 								<!-- Post button  -->
@@ -142,6 +142,12 @@
 									class="self-end py-2 px-5 mt-3 bg-greenPrimary text-white font-bold rounded-full shadow-sm hover:bg-greenHover dark:hover:bg-greenHoverLight">
 									Post
 								</button>
+								<div
+									id="postErrorContainer"
+									class="hidden w-full items-center my-2 p-2 text-darkBlue bg-red-300 border border-red-600 rounded-md">
+									<i class="fa-solid fa-circle-exclamation text-red-700"></i>
+									<p id="postError" class="pl-2 text-left"></p>
+								</div>
 							</form>
 						</div>
 						<!-- User navigation  -->
