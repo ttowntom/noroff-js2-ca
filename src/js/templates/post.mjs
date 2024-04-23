@@ -1,4 +1,5 @@
 import { API_SOCIAL_URL } from "../api/constants.mjs";
+import * as postAPI from "../api/posts/index.mjs";
 
 export function postTemplate(postData) {
 	// Create wrapper
@@ -186,10 +187,23 @@ export function postTemplate(postData) {
 		deleteOption.append(deleteButton);
 		userMenuList.append(deleteOption);
 
+		// Add event listener to the edit button
+		editButton.addEventListener("click", () => {
+			// Code to edit the post goes here
+		});
+
+		// Add event listener to the delete button
+		deleteButton.addEventListener("click", () => {
+			// Remove post from the DB
+			postAPI.removePost(postData.id);
+			// Remove post from the DOM
+			post.remove();
+		});
+
 		userPostMenu.append(userMenuList);
 		row.append(userPostMenu);
 
-		// Add event listener to edit button
+		// Add event listener to options button
 		optionsButton.addEventListener("click", () => {
 			userPostMenu.classList.remove("hidden");
 		});
