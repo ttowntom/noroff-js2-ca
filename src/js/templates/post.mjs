@@ -169,8 +169,8 @@ export function postTemplate(postData) {
 			"fa-solid",
 			"fa-delete-right",
 			"text-greenPrimary",
-			"group-hover:text-greenHover",
-			"dark:group-hover:text-greenHoverLight"
+			"group-hover:text-red-800",
+			"dark:group-hover:text-red-500"
 		);
 		deleteButton.append(deleteIcon);
 		// Create delete text
@@ -179,8 +179,8 @@ export function postTemplate(postData) {
 			"ms-2",
 			"text-greenDark",
 			"dark:text-gray-200",
-			"group-hover:text-greenHover",
-			"dark:group-hover:text-greenHoverLight"
+			"group-hover:text-red-800",
+			"dark:group-hover:text-red-500"
 		);
 		deleteText.textContent = "Delete post";
 		deleteButton.append(deleteText);

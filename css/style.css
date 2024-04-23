@@ -1250,6 +1250,11 @@ video {
   color: rgb(74 145 129 / var(--tw-text-opacity));
 }
 
+.group:hover .group-hover\:text-red-800 {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity));
+}
+
 .dark\:border-0:is(.dark *) {
   border-width: 0px;
 }
@@ -1322,6 +1327,11 @@ video {
 .group:hover .dark\:group-hover\:text-greenHoverLight:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(131 236 213 / var(--tw-text-opacity));
+}
+
+.group:hover .dark\:group-hover\:text-red-500:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {

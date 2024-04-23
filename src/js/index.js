@@ -45,8 +45,8 @@ if (path === "/") {
 	renderPosts();
 
 	// Open/Close user menu on posts
-	userMenuPost();
-	closeUserMenuPost();
+	// userMenuPost();
+	// closeUserMenuPost();
 } else {
 	// Set theme
 	themeSelector();
