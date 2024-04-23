@@ -1,5 +1,7 @@
 import { API_SOCIAL_URL } from "../api/constants.mjs";
 import * as postAPI from "../api/posts/index.mjs";
+import { dateTime } from "../handlers/dateTime.mjs";
+import { editPost } from "../handlers/postEdit.mjs";
 
 export function postTemplate(postData) {
 	// Create wrapper
@@ -49,20 +51,23 @@ export function postTemplate(postData) {
 	authorNameText.textContent = postData.author.name;
 	authorNameLink.append(authorNameText);
 	metadata.append(authorNameLink);
-	// Create post date
+	// Create post created date
 	const postDate = document.createElement("time");
+	postDate.dataset.postDate = postData.id;
 	postDate.dateTime = postData.created;
 	// Text content formatted as "Month Day, Year"
-	postDate.textContent = new Date(postData.created).toLocaleDateString(
-		"en-US",
-		{
-			month: "long",
-			day: "numeric",
-			year: "numeric",
-		}
-	);
+	postDate.textContent = dateTime(postData.created);
 	postDate.classList.add("text-sm", "text-gray-400", "font-light");
 	metadata.append(postDate);
+
+	// Create post updated date
+	if (postData.updated > postData.created) {
+		const updatedDate = document.createElement("time");
+		updatedDate.dateTime = postData.updated;
+		// Text content formatted as "Month Day, Year"
+		updatedDate.textContent = dateTime(postData.updated);
+		postDate.textContent = `${postDate.textContent} | (edited ${updatedDate.textContent})`;
+	}
 
 	// Append to header row
 	row.append(profileImage);
@@ -90,6 +95,7 @@ export function postTemplate(postData) {
 
 		// Create options menu
 		const userPostMenu = document.createElement("nav");
+		userPostMenu.dataset.menuId = postData.id;
 		userPostMenu.classList.add(
 			"hidden",
 			"absolute",
@@ -189,7 +195,8 @@ export function postTemplate(postData) {
 
 		// Add event listener to the edit button
 		editButton.addEventListener("click", () => {
-			// Code to edit the post goes here
+			// Edit the post
+			editPost(postData);
 		});
 
 		// Add event listener to the delete button
@@ -224,11 +231,18 @@ export function postTemplate(postData) {
 
 	post.append(header);
 
+	// Create post link wrapper
+	const postLink = document.createElement("a");
+	postLink.href = `/feed/post/?id=${postData.id}`;
+	postLink.dataset.bodyId = postData.id;
+
 	// Create post content
 	const content = document.createElement("p");
+	content.dataset.bodyData = postData.id;
 	content.classList.add("mt-3", "dark:text-gray-200", "break-words");
 	content.textContent = postData.body;
-	post.append(content);
+	postLink.append(content);
+	post.append(postLink);
 
 	// Create post footer
 	const footer = document.createElement("div");
