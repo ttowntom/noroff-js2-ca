@@ -8,6 +8,7 @@ import * as templates from "./templates/index.mjs";
 
 import { themeSelector } from "./ui/themeSelector.js";
 import { userMenuProfile, closeUserMenuProfile } from "./ui/userMenuProfile.js";
+import { renderProfileImage } from "./ui/renderProfileImage.mjs";
 
 export default function router() {
 	// Get current path
@@ -29,6 +30,9 @@ export default function router() {
 			// Set theme
 			themeSelector();
 
+			// Render user profile image
+			renderProfileImage();
+
 			// Open/Close user menu on profile
 			userMenuProfile();
 			closeUserMenuProfile();
@@ -49,11 +53,14 @@ export default function router() {
 					templates.renderPostTemplate(postData, feedContainer);
 				});
 			}
+			renderPosts();
 
 			// Set post POST form listener
 			setPostFormListener();
 
-			renderPosts();
+			// Render user profile image
+			renderProfileImage();
+
 			break;
 		case "/feed/post/":
 			// Single post page
