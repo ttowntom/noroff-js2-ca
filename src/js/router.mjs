@@ -79,8 +79,10 @@ export default function router() {
 				const postData = await post.getPost(postId);
 				templates.renderPostTemplate(postData.data, postContainer);
 			}
-
 			renderPost();
+
+			// Render user profile image
+			renderProfileImage();
 
 			break;
 
