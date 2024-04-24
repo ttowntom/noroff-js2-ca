@@ -4,6 +4,11 @@ import { dateTime } from "../handlers/dateTime.mjs";
 import { editPost } from "../handlers/postEdit.mjs";
 
 export function postTemplate(postData) {
+	// If there is no body, use the title as the body
+	if (!postData.body) {
+		postData.body = postData.title;
+	}
+
 	// Create wrapper
 	const post = document.createElement("article");
 	post.classList.add(
