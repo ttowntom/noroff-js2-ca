@@ -654,6 +654,11 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .-me-9 {
   margin-inline-end: -2.25rem;
 }
@@ -712,6 +717,14 @@ video {
 
 .mt-9 {
   margin-top: 2.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .block {

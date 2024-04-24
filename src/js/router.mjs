@@ -9,6 +9,7 @@ import * as templates from "./templates/index.mjs";
 import { themeSelector } from "./ui/themeSelector.js";
 import { userMenuProfile, closeUserMenuProfile } from "./ui/userMenuProfile.js";
 import { renderProfileImage } from "./ui/renderProfileImage.mjs";
+import { loadMorePosts } from "./handlers/postsLoadMore.mjs";
 
 export default function router() {
 	// Get current path
@@ -54,6 +55,9 @@ export default function router() {
 				});
 			}
 			renderPosts();
+
+			// Set load more posts listener
+			loadMorePosts();
 
 			// Set post POST form listener
 			setPostFormListener();
