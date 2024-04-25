@@ -16,7 +16,7 @@
 		<div class="min-h-screen w-full flex flex-col mx-auto">
 			<!-- Nav/Main/Footer container  -->
 			<div
-				class="flex flex-grow flex-col md:flex-row md:max-w-[990px] mx-auto md:border md:border-y-0 md:border-gray-200 md:dark:border-gray-700">
+				class="flex flex-grow flex-col md:flex-row md:max-w-[990px] md:mx-auto md:border md:border-y-0 md:border-gray-200 md:dark:border-gray-700">
 				<!-- Left/Top menu  -->
 				<nav
 					class="z-10 fixed h-16 md:h-screen w-full md:w-56 flex md:flex-col items-center md:items-start md:space-x-0 md:space-y-14 py-3 ps-6 pe-16 bg-greenPrimary text-white">
@@ -94,9 +94,8 @@
 							href="/profile/"
 							class="flex items-center group text-almostWhite">
 							<img
-								src="../img/ttowntom.png"
 								alt="profile image"
-								class="h-9 md:h-5 w-9 md:w-5 rounded-full border-2 border-greenPrimary group-hover:border-almostWhite" />
+								class="profileImage h-9 md:h-5 w-9 md:w-5 rounded-full border-2 border-greenPrimary group-hover:border-almostWhite" />
 							<span
 								class="hidden md:inline-block ml-3 text-gray-50 group-hover:text-almostWhite break-all"
 								>tTownTom
@@ -106,7 +105,7 @@
 				</nav>
 				<!-- Right/bottom section  -->
 				<main
-					class="flex flex-col flex-grow w-[calc(100vw-2rem)] md:max-w-[68vw] mt-16 md:mt-0 md:ms-56 py-3 px-5 bg-desertTan dark:bg-darkBlue text-darkBlue dark:text-white">
+					class="flex flex-col flex-grow w-[calc(100vw-17px)] md:max-w-[68vw] mt-16 md:mt-0 md:ms-56 py-3 px-3 md:px-5 bg-desertTan dark:bg-darkBlue text-darkBlue dark:text-white">
 					<!-- User actions container  -->
 					<section id="user-info" class="flex flex-col mt-3">
 						<!-- Post input  -->
@@ -116,9 +115,8 @@
 							<div class="flex space-x-5">
 								<!-- Profile image  -->
 								<img
-									src="../img/ttowntom.png"
 									alt="profile image"
-									class="h-12 w-12 rounded-full" />
+									class="profileImage h-12 w-12 rounded-full" />
 
 								<div class="flex flex-col">
 									<!-- Profile name  -->
@@ -153,7 +151,7 @@
 						</div>
 						<!-- User navigation  -->
 						<div
-							class="flex flex-col-reverse md:flex-row md:justify-between md:items-end my-6">
+							class="flex flex-col-reverse md:flex-row md:justify-between md:items-end mt-6">
 							<!-- User nav items  -->
 							<nav class="flex-grow justify-between">
 								<ul class="flex space-x-6 border-b border-greenPrimary">
@@ -184,15 +182,17 @@
 									</select>
 								</div>
 								<!-- Search -->
-								<form class="flex flex-grow items-center mb-3">
+								<form id="searchForm" class="flex flex-grow items-center mb-3">
 									<input
 										type="text"
+										name="searchTerm"
 										placeholder="Search"
 										class="w-full -me-9 p-3 focus:outline-none dark:bg-slate-800 text-darkBlue dark:text-gray-200 rounded-full" />
 									<button
+										id="searchBtn"
 										type="submit"
 										class="py-2 px-5 bg-greenPrimary text-white font-bold rounded-full shadow-sm hover:bg-greenHover dark:hover:bg-greenHoverLight">
-										<i class="fas fa-search"></i>
+										<i id="searchIcon" class="fas fa-search"></i>
 									</button>
 								</form>
 							</div>
@@ -200,115 +200,23 @@
 					</section>
 
 					<!-- Feed section  -->
-					<section id="feed" class="mt-6">
-						<!-- Card container  -->
-						<article
-							class="relative flex flex-col md:-mt-6 p-4 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-sm">
-							<!-- Card header  -->
-							<div class="flex justify-between">
-								<!-- Header row  -->
-								<div class="flex">
-									<!-- Profile image  -->
-									<img
-										src="../img/ttowntom.png"
-										alt="profile image"
-										class="h-12 w-12 rounded-full" />
-									<!-- Post meta  -->
-									<div class="flex flex-col ms-5">
-										<!-- Profile name  -->
-										<a href="/profile/">
-											<h3
-												class="text-greenPrimary text-xl font-bold hover:text-greenHover dark:hover:text-greenHoverLight">
-												tTownTom
-											</h3>
-										</a>
-										<!-- Date posted  -->
-										<p class="text-sm text-gray-400 font-light">
-											Mar 14th, 2024
-										</p>
-									</div>
-								</div>
-								<!-- Post edit button  -->
-								<button
-									id="user-menu-post-button"
-									class="userMenuPostButton self-start text-gray-400 hover:text-greenPrimary"
-									aria-label="Edit this post">
-									<i class="fas fa-ellipsis-v"></i>
-								</button>
-								<!-- User post menu  -->
-								<nav
-									id="user-menu-post"
-									class="userMenuPost hidden absolute top-0 right-0 p-6 pt-9 pe-16 bg-white border dark:bg-slate-900 border-gray-200 dark:border-gray-600 rounded-md shadow-2xl">
-									<button
-										id="user-menu-post-close-btn"
-										class="userMenuPostCloseBtn absolute right-2 top-2">
-										<i
-											class="fa-solid fa-circle-xmark text-xl text-red-500 dark:text-red-300 hover:text-red-800 dark:hover:text-red-500"></i>
-									</button>
-									<ul class="space-y-3">
-										<li class="flex items-center">
-											<button class="flex items-center group">
-												<i
-													class="fa-solid fa-pen-to-square text-greenPrimary group-hover:text-greenHover dark:group-hover:text-greenHoverLight"></i>
-												<span
-													class="ms-2 text-greenDark dark:text-gray-200 group-hover:text-greenHover dark:group-hover:text-greenHoverLight"
-													>Edit post</span
-												>
-											</button>
-										</li>
-										<li class="flex items-center">
-											<button class="flex items-center group">
-												<i
-													class="fa-solid fa-delete-right text-greenPrimary group-hover:text-greenHover dark:group-hover:text-greenHoverLight"></i>
-												<span
-													class="ms-2 text-greenDark dark:text-gray-200 group-hover:text-red-800 dark:group-hover:text-red-500"
-													>Delete post</span
-												>
-											</button>
-										</li>
-									</ul>
-								</nav>
+					<section class="mt-1">
+						<div id="feed">
+							<!-- JS generated content  -->
+						</div>
+						<div class="flex flex-col justify-center my-3">
+							<button
+								id="loadMoreBtn"
+								class="py-2 px-5 mt-3 bg-greenPrimary text-white font-bold rounded-full shadow-sm hover:bg-greenHover dark:hover:bg-greenHoverLight">
+								Load more posts
+							</button>
+							<div
+								id="loadErrorContainer"
+								class="hidden w-full items-center my-2 p-2 text-darkBlue bg-red-300 border border-red-600 rounded-md">
+								<i class="fa-solid fa-circle-exclamation text-red-700"></i>
+								<p id="loadError" class="pl-2 text-left"></p>
 							</div>
-							<!-- Card content  -->
-							<p class="mt-3 dark:text-gray-200 break-words">
-								Early morning hikes always clear my head before a day of coding.
-								Nature's beauty is unmatched 🌲👨‍💻
-								<a
-									href="#"
-									class="text-greenPrimary hover:text-greenHover dark:hover:text-greenHoverLight"
-									>#NatureLover</a
-								>
-								<a
-									href="#"
-									class="text-greenPrimary hover:text-greenHover dark:hover:text-greenHoverLight"
-									>#CodeBreak</a
-								>
-							</p>
-							<!-- Card footer  -->
-							<div class="flex space-x-5 mt-3">
-								<!-- Like button  -->
-								<button
-									class="flex items-center text-gray-400 hover:text-greenPrimary dark:hover:text-greenHoverLight"
-									aria-label="Like this post">
-									<i class="fa-regular fa-heart"></i>
-									<span class="ms-1">12</span>
-								</button>
-								<!-- Comment button  -->
-								<button
-									class="flex items-center text-gray-400 hover:text-greenPrimary dark:hover:text-greenHoverLight"
-									aria-label="Comment on this post">
-									<i class="fas fa-comment"></i>
-									<span class="ms-1">3</span>
-								</button>
-								<!-- Share button  -->
-								<button
-									class="flex items-center text-gray-400 hover:text-greenPrimary dark:hover:text-greenHoverLight"
-									aria-label="Share this post">
-									<i class="fas fa-share"></i>
-									<span class="ms-1">5</span>
-								</button>
-							</div>
-						</article>
+						</div>
 					</section>
 				</main>
 			</div>

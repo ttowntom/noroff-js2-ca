@@ -4,6 +4,11 @@ import { dateTime } from "../handlers/dateTime.mjs";
 import { editPost } from "../handlers/postEdit.mjs";
 
 export function postTemplate(postData) {
+	// If there is no body, use the title as the body
+	if (!postData.body) {
+		postData.body = postData.title;
+	}
+
 	// Create wrapper
 	const post = document.createElement("article");
 	post.classList.add(
@@ -242,6 +247,16 @@ export function postTemplate(postData) {
 	content.classList.add("mt-3", "dark:text-gray-200", "break-words");
 	content.textContent = postData.body;
 	postLink.append(content);
+
+	// Create post media
+	if (postData.media) {
+		const media = document.createElement("img");
+		media.src = postData.media.url;
+		media.alt = postData.media.alt;
+		media.classList.add("mt-3", "w-full", "h-auto", "rounded-md");
+		postLink.append(media);
+	}
+
 	post.append(postLink);
 
 	// Create post footer
