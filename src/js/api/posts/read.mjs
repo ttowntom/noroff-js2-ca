@@ -8,6 +8,7 @@ export async function getPosts(limit = 100, page = 1) {
 		const getPostURL = `${API_SOCIAL_URL}/posts${action}&limit=${limit}&page=${page}`;
 
 		const response = await authFetch(getPostURL);
+
 		return await response.json();
 	} catch (error) {
 		throw new Error("Error getting posts: " + error.message);

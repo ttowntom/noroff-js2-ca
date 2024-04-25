@@ -4,6 +4,7 @@ import { setLogoutListener } from "./handlers/logout.mjs";
 import { setPostFormListener } from "./handlers/post.mjs";
 
 import * as post from "./api/posts/index.mjs";
+import * as profile from "./api/profile/index.mjs";
 import * as templates from "./templates/index.mjs";
 
 import { themeSelector } from "./ui/themeSelector.js";
@@ -31,6 +32,18 @@ export default function router() {
 			// Profile page
 			// Set theme
 			themeSelector();
+
+			// Render posts
+			async function renderPostsFromProfile() {
+				const user = JSON.parse(localStorage.getItem("profile"));
+
+				const feedContainer = document.querySelector("#feed");
+				const posts = await profile.getPostsFromProfile(user.name);
+				posts.data.forEach((postData) => {
+					templates.renderPostTemplate(postData, feedContainer);
+				});
+			}
+			renderPostsFromProfile();
 
 			// Render user profile image
 			renderProfileImage();
