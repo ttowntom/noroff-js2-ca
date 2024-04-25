@@ -15,5 +15,5 @@ export async function removePost(id) {
 		method,
 	});
 
-	return await response.json();
+	return;
 }
