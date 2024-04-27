@@ -31,7 +31,7 @@ export function profileTemplate(profileData) {
 	const userName = JSON.parse(localStorage.getItem("profile")).name;
 	if (profileData.name === userName) {
 		const editProfileButton = document.createElement("button");
-		editProfileButton.id = "editProfileButton";
+		editProfileButton.id = "userMenuProfileButton";
 		editProfileButton.ariaLabel = "Edit Profile";
 		editProfileButton.classList.add(
 			"self-start",
@@ -159,6 +159,7 @@ export function profileTemplate(profileData) {
 		themeProfileMenuItem.classList.add("flex", "items-center");
 		//Create "Toggle theme" menu button
 		const themeProfileMenuButton = document.createElement("button");
+		themeProfileMenuButton.id = "themeToggleBtn";
 		themeProfileMenuButton.classList.add("flex", "items-center", "group");
 		// Add dark icon
 		const themeDarkProfileMenuIcon = document.createElement("i");
@@ -205,6 +206,7 @@ export function profileTemplate(profileData) {
 		logOutProfileMenuItem.classList.add("flex", "items-center");
 		//Create "Log out" menu button
 		const LogOutProfileMenuButton = document.createElement("button");
+		LogOutProfileMenuButton.id = "logout";
 		LogOutProfileMenuButton.classList.add("flex", "items-center", "group");
 		// Add button icon
 		const logOutProfileMenuIcon = document.createElement("i");
@@ -233,6 +235,26 @@ export function profileTemplate(profileData) {
 
 		userMenu.append(userMenuList);
 		profileMetaData.append(userMenu);
+
+		// Add user menu button event listener - open user menu
+		editProfileButton.addEventListener("click", () => {
+			userMenu.classList.toggle("hidden");
+		});
+
+		// Add user menu close button event listener - close user menu
+		userMenuButton.addEventListener("click", () => {
+			userMenu.classList.add("hidden");
+		});
+
+		// Close user menu when clicking outside of the user menu
+		document.addEventListener("click", function (event) {
+			if (
+				!userMenu.contains(event.target) &&
+				!editProfileButton.contains(event.target)
+			) {
+				userMenu.classList.add("hidden");
+			}
+		});
 	}
 
 	profileMetaData.append(userContainer);

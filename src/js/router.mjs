@@ -8,7 +8,6 @@ import * as profile from "./api/profile/index.mjs";
 import * as templates from "./templates/index.mjs";
 
 import { themeSelector } from "./ui/themeSelector.js";
-import { userMenuProfile, closeUserMenuProfile } from "./ui/userMenuProfile.js";
 import { renderProfileImage } from "./ui/renderProfileImage.mjs";
 import { loadMorePosts } from "./handlers/postsLoadMore.mjs";
 import { setSearchFormListener } from "./handlers/search.mjs";
@@ -38,14 +37,20 @@ export default function router() {
 				user = loggedInUser.name;
 			}
 
-			// Set theme
-			themeSelector();
+			// Render user profile image
+			renderProfileImage();
 
 			// Render profile data
 			async function renderProfile(user) {
 				const profileContainer = document.querySelector("#user-info");
 				const profileData = await getProfile(user);
 				templates.renderProfileTemplate(profileData.data, profileContainer);
+
+				// Call themeSelector() after the profile is rendered
+				themeSelector();
+
+				// Set logout listener
+				setLogoutListener();
 			}
 			renderProfile(user);
 
@@ -59,15 +64,6 @@ export default function router() {
 			}
 			renderPostsFromProfile();
 
-			// Render user profile image
-			renderProfileImage();
-
-			// Open/Close user menu on profile
-			userMenuProfile();
-			closeUserMenuProfile();
-
-			// Set logout listener
-			setLogoutListener();
 			break;
 		case "/feed/":
 			// Feed page

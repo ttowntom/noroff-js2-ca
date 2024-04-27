@@ -1,11 +1,10 @@
-const themeToggleBtn = document.querySelector("#theme-toggle") || null;
-const themeToggleTxt = document.querySelector("#theme-toggle-text") || null;
-const themeToggleDarkIcon =
-	document.querySelector("#theme-toggle-dark-icon") || null;
-const themeToggleLightIcon =
-	document.querySelector("#theme-toggle-light-icon") || null;
-
 export function themeSelector() {
+	const themeToggleBtn = document.querySelector("#themeToggleBtn") || null;
+	const themeToggleTxt = document.querySelector("#themeToggleText") || null;
+	const themeToggleDarkIcon = document.querySelector("#themeDarkIcon") || null;
+	const themeToggleLightIcon =
+		document.querySelector("#themeLightIcon") || null;
+
 	// If no toggle button, set theme and return
 	if (!themeToggleBtn) {
 		// Check if dark mode is set in local storage or by the browser
