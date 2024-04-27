@@ -1,10 +1,9 @@
-import { API_SOCIAL_URL } from "../api/constants.mjs";
 import * as postAPI from "../api/posts/index.mjs";
 import { dateTime } from "../handlers/dateTime.mjs";
 import { editPost } from "../handlers/postEdit.mjs";
 
 export function postTemplate(postData) {
-	// If there is no body, use the title as the body
+	// If there is no post body, use the title as the body
 	if (!postData.body) {
 		postData.body = postData.title;
 	}
@@ -43,7 +42,7 @@ export function postTemplate(postData) {
 	metadata.classList.add("flex", "flex-col", "ms-5");
 	// Create author name link
 	const authorNameLink = document.createElement("a");
-	authorNameLink.href = `${API_SOCIAL_URL}/profiles/${postData.author.name}`;
+	authorNameLink.href = `/profile/?name=${postData.author.name}`;
 	// Create author name text
 	const authorNameText = document.createElement("h3");
 	authorNameText.classList.add(

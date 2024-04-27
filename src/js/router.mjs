@@ -12,6 +12,7 @@ import { userMenuProfile, closeUserMenuProfile } from "./ui/userMenuProfile.js";
 import { renderProfileImage } from "./ui/renderProfileImage.mjs";
 import { loadMorePosts } from "./handlers/postsLoadMore.mjs";
 import { setSearchFormListener } from "./handlers/search.mjs";
+import { getProfile } from "./api/profile/profileRead.mjs";
 
 export default function router() {
 	// Get current path
@@ -30,15 +31,28 @@ export default function router() {
 			break;
 		case "/profile/":
 			// Profile page
+			// solve user name
+			let user = urlParams.get("name");
+			if (!user) {
+				const loggedInUser = JSON.parse(localStorage.getItem("profile"));
+				user = loggedInUser.name;
+			}
+
 			// Set theme
 			themeSelector();
 
+			// Render profile data
+			async function renderProfile(user) {
+				const profileContainer = document.querySelector("#user-info");
+				const profileData = await getProfile(user);
+				templates.renderProfileTemplate(profileData.data, profileContainer);
+			}
+			renderProfile(user);
+
 			// Render posts
 			async function renderPostsFromProfile() {
-				const user = JSON.parse(localStorage.getItem("profile"));
-
 				const feedContainer = document.querySelector("#feed");
-				const posts = await profile.getPostsFromProfile(user.name);
+				const posts = await profile.getPostsFromProfile(user);
 				posts.data.forEach((postData) => {
 					templates.renderPostTemplate(postData, feedContainer);
 				});
