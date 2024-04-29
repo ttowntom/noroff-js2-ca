@@ -1,13 +1,17 @@
+import { editProfile } from "../handlers/profileEdit.mjs";
+
 export function profileTemplate(profileData) {
 	// Create profile container
 	const profileContainer = document.createElement("div");
 	profileContainer.classList.add("flex", "flex-col", "mt-3");
 
 	const profile = document.createElement("div");
+	profile.id = "profile";
 	profile.classList.add("flex", "relative");
 
 	// Create profile image
 	const profileImage = document.createElement("img");
+	profileImage.id = "profileImage";
 	profileImage.src = profileData.avatar.url;
 	profileImage.alt = profileData.name + " profile image";
 	profileImage.classList.add("h-24", "w-24", "rounded-full");
@@ -255,6 +259,12 @@ export function profileTemplate(profileData) {
 				userMenu.classList.add("hidden");
 			}
 		});
+
+		// Add event listener to the "Edit Profile" menu item
+		editProfileMenuButton.addEventListener("click", () => {
+			// Edit the profile
+			editProfile(profileData);
+		});
 	}
 
 	profileMetaData.append(userContainer);
@@ -265,6 +275,7 @@ export function profileTemplate(profileData) {
 		: `${profileData.name} has not added a bio yet.`;
 
 	const profileBio = document.createElement("p");
+	profileBio.id = "profileBio";
 	profileBio.classList.add(
 		"text-md",
 		"text-gray-500",
