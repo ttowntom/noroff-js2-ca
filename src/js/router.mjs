@@ -12,6 +12,7 @@ import { renderProfileImage } from "./ui/renderProfileImage.mjs";
 import { loadMorePosts } from "./handlers/postsLoadMore.mjs";
 import { setSearchFormListener } from "./handlers/search.mjs";
 import { getProfile } from "./api/profile/profileRead.mjs";
+import { renderProfileName } from "./ui/renderProfileName.mjs";
 
 export default function router() {
 	// Get current path
@@ -39,6 +40,9 @@ export default function router() {
 
 			// Render user profile image
 			renderProfileImage();
+
+			// Render profile name
+			renderProfileName();
 
 			// Render profile data
 			async function renderProfile(user) {
@@ -92,6 +96,9 @@ export default function router() {
 			// Render user profile image
 			renderProfileImage();
 
+			// Render profile name
+			renderProfileName();
+
 			break;
 		case "/feed/post/":
 			// Single post page
@@ -110,6 +117,9 @@ export default function router() {
 
 			// Render user profile image
 			renderProfileImage();
+
+			// Render profile name
+			renderProfileName();
 
 			break;
 
