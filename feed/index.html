@@ -155,16 +155,21 @@
 							<!-- User nav items  -->
 							<nav class="flex-grow justify-between">
 								<ul class="flex space-x-6 border-b border-greenPrimary">
-									<li class="border-b-4 border-greenPrimary">
-										<a href="#" class="text-greenPrimary font-bold">Timeline</a>
+									<li id="navTimelineLi" class="border-b-4 border-greenPrimary">
+										<button
+											id="navTimeline"
+											class="text-greenPrimary font-bold">
+											Timeline
+										</button>
 									</li>
 									<li
+										id="navFollowingLi"
 										class="hover:border-b-4 hover:border-greenHover dark:hover:border-greenHoverLight">
-										<a
-											href="#"
-											class="text-greenPrimary font-bold hover:text-greenHover dark:hover:text-greenHoverLight"
-											>For you</a
-										>
+										<button
+											id="navFollowing"
+											class="text-greenPrimary font-bold hover:text-greenHover dark:hover:text-greenHoverLight">
+											Following
+										</button>
 									</li>
 								</ul>
 							</nav>

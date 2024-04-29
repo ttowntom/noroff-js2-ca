@@ -6,6 +6,7 @@ import { setPostFormListener } from "./handlers/post.mjs";
 import * as post from "./api/posts/index.mjs";
 import * as profile from "./api/profile/index.mjs";
 import * as templates from "./templates/index.mjs";
+import * as feedNav from "./handlers/feedNav.mjs";
 
 import { themeSelector } from "./ui/themeSelector.js";
 import { renderProfileImage } from "./ui/renderProfileImage.mjs";
@@ -87,17 +88,21 @@ export default function router() {
 			// Set load more posts listener
 			loadMorePosts();
 
+			// Render user profile image
+			renderProfileImage();
+
+			// Render profile name
+			renderProfileName();
+
 			// Set post POST form listener
 			setPostFormListener();
 
 			// Set search form listener
 			setSearchFormListener();
 
-			// Render user profile image
-			renderProfileImage();
-
-			// Render profile name
-			renderProfileName();
+			// Set feed navigation listeners
+			feedNav.feedNavTimeline();
+			feedNav.feedNavFollowing();
 
 			break;
 		case "/feed/post/":
