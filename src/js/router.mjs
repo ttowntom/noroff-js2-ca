@@ -14,6 +14,7 @@ import { loadMorePosts } from "./handlers/postsLoadMore.mjs";
 import { setSearchFormListener } from "./handlers/search.mjs";
 import { getProfile } from "./api/profile/profileRead.mjs";
 import { renderProfileName } from "./ui/renderProfileName.mjs";
+import { feedFilter } from "./handlers/feedFilter.mjs";
 
 export default function router() {
 	// Get current path
@@ -104,6 +105,8 @@ export default function router() {
 			feedNav.feedNavTimeline();
 			feedNav.feedNavFollowing();
 
+			// Set filter listener
+			feedFilter();
 			break;
 		case "/feed/post/":
 			// Single post page
