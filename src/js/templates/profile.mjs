@@ -1,4 +1,5 @@
 import { editProfile } from "../handlers/profileEdit.mjs";
+import { followProfile, unfollowProfile } from "../api/profile/follow.mjs";
 
 export function profileTemplate(profileData) {
 	// Create profile container
@@ -420,7 +421,61 @@ export function profileTemplate(profileData) {
 			"border-greenPrimary",
 			"hover:shadow-sm"
 		);
-		followButton.textContent = "Follow";
+
+		// If the user is already following the profile
+		if (profileData.followers.find((follower) => follower.name === userName)) {
+			followButton.textContent = "Unfollow";
+		} else {
+			followButton.textContent = "Follow";
+		}
+
+		// Add event listener to the follow button
+		followButton.addEventListener("click", async () => {
+			if (
+				profileData.followers.find((follower) => follower.name === userName)
+			) {
+				// Unfollow the profile
+				const response = await unfollowProfile(profileData.name);
+
+				// Change the button text
+				followButton.textContent = "Follow";
+				// Update the followers count
+				profileData._count.followers--;
+				followersCount.textContent = profileData._count.followers;
+
+				// Update local storage
+				const profile = JSON.parse(localStorage.getItem("profile"));
+				// Remove the profile from the following array
+				profile.following = profile.following.filter(
+					(following) => following.name !== profileData.name
+				);
+				localStorage.setItem("profile", JSON.stringify(profile));
+
+				// Update the followers array
+				profileData.followers = profileData.followers.filter(
+					(follower) => follower.name !== userName
+				);
+			} else {
+				// Follow the profile and use response to update the followers array
+				const response = await followProfile(profileData.name);
+
+				// Change the button text
+				followButton.textContent = "Unfollow";
+				// Update the followers count
+				profileData._count.followers++;
+				followersCount.textContent = profileData._count.followers;
+
+				// Update the followers array
+				profileData.followers.push({ name: userName });
+
+				// Update local storage
+				const profile = JSON.parse(localStorage.getItem("profile"));
+				// Add the profile to the following array
+				profile.following.push({ name: profileData.name });
+				localStorage.setItem("profile", JSON.stringify(profile));
+			}
+		});
+
 		userNavigationContainer.append(followButton);
 	}
 

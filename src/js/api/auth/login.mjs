@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../constants.mjs";
 import * as storage from "../../storage/index.mjs";
+import { getProfile } from "../profile/profileRead.mjs";
 
 export async function login(profile, action, method) {
 	const actionURL = new URL(action);
@@ -36,8 +37,14 @@ export async function login(profile, action, method) {
 		const data = await response.json();
 		const { accessToken, ...user } = data.data;
 
-		// Save to local storage
+		// Save token to local storage
 		storage.save("token", accessToken);
+
+		// Get following
+		const profile = await getProfile(user.name);
+		user.following = profile.data.following;
+
+		// Save to local storage
 		storage.save("profile", user);
 
 		// Redirect
