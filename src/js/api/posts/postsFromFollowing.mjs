@@ -6,7 +6,6 @@ const action = "?_author=true&_reactions=true&_comments=true";
 export async function getPostsFromFollowing(limit = 100, page = 1) {
 	try {
 		const getPostURL = `${API_SOCIAL_URL}/posts/following${action}&limit=${limit}&page=${page}`;
-		console.log("getPostURL", getPostURL);
 
 		const response = await authFetch(getPostURL);
 
