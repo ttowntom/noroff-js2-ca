@@ -252,7 +252,8 @@ export function postTemplate(postData) {
 		const media = document.createElement("img");
 		media.src = postData.media.url;
 		media.alt = postData.media.alt;
-		media.classList.add("mt-3", "w-full", "h-auto", "rounded-md");
+		media.dataset.mediaData = postData.id;
+		media.classList.add("mt-3", "w-full", "rounded-md");
 		postLink.append(media);
 	}
 

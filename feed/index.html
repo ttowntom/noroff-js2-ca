@@ -134,12 +134,22 @@
 									id="postBody"
 									class="w-full p-3 focus:outline-none dark:bg-slate-800 text-darkBlue dark:text-gray-200"
 									placeholder="Give us an update!"></textarea>
-								<!-- Post button  -->
-								<button
-									type="submit"
-									class="self-end py-2 px-5 mt-3 bg-greenPrimary text-white font-bold rounded-full shadow-sm hover:bg-greenHover dark:hover:bg-greenHoverLight">
-									Post
-								</button>
+								<div class="flex flex-wrap items-center justify-center">
+									<!-- Media URL input  -->
+									<input
+										type="url"
+										name="media"
+										id="postMedia"
+										class="flex-grow mr-3 p-3 text-sm focus:outline-none dark:bg-slate-800 text-darkBlue dark:text-gray-200 border border-gray-200 dark:border-gray-600 rounded-lg"
+										placeholder="Media URL" />
+
+									<!-- Post button  -->
+									<button
+										type="submit"
+										class="self-end py-2 px-5 mt-3 bg-greenPrimary text-white font-bold rounded-full shadow-sm hover:bg-greenHover dark:hover:bg-greenHoverLight">
+										Post
+									</button>
+								</div>
 
 								<div
 									id="postErrorContainer"
@@ -174,7 +184,7 @@
 								</ul>
 							</nav>
 							<div
-								class="flex space-x-3 mb-3 md:mb-0 md:border-b md:border-b-greenPrimary">
+								class="flex flex-wrap md:flex-nowrap justify-center space-x-3 mb-3 md:mb-0 md:ps-5 md:border-b md:border-b-greenPrimary">
 								<!-- Filter by options  -->
 								<div class="flex items-center space-x-3 mb-3">
 									<select

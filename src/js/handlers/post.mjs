@@ -10,10 +10,13 @@ export function setPostFormListener() {
 
 			const form = e.target;
 			const formData = new FormData(form);
-			// const post = Object.fromEntries(formData.entries());
 			const postData = {
 				title: `${user.name} whispered`,
 				body: formData.get("body"),
+				media: {
+					url: formData.get("media"),
+					alt: "Image uploaded by user",
+				},
 			};
 
 			// Send to API

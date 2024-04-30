@@ -5,6 +5,9 @@ export function editPost(postData) {
 	// Get the post body elements
 	const postWrapper = document.querySelector(`[data-body-id="${postData.id}"]`);
 	const postBody = document.querySelector(`[data-body-data="${postData.id}"]`);
+	const postMedia = document.querySelector(
+		`[data-media-data="${postData.id}"]`
+	);
 	const postDate = document.querySelector(`[data-post-date="${postData.id}"]`);
 
 	// Hide post menu
@@ -33,9 +36,42 @@ export function editPost(postData) {
 
 	container.append(textarea);
 
+	// Create media/button container
+	const mediaButtonContainer = document.createElement("div");
+	mediaButtonContainer.classList.add(
+		"flex",
+		"flex-wrap",
+		"md:flex-nowrap",
+		"space-x-2"
+	);
+
+	// Create media url input
+	const mediaInput = document.createElement("input");
+	mediaInput.type = "url";
+	mediaInput.name = "media";
+	!postMedia
+		? (mediaInput.placeholder = "Enter media URL")
+		: (mediaInput.value = postMedia.src);
+	mediaInput.classList.add(
+		"flex-grow",
+		"mr-3",
+		"p-3",
+		"text-sm",
+		"focus:outline-none",
+		"dark:bg-slate-800",
+		"text-darkBlue",
+		"dark:text-gray-200",
+		"border",
+		"border-gray-200",
+		"dark:border-gray-600",
+		"rounded-lg"
+	);
+
+	mediaButtonContainer.append(mediaInput);
+
 	// Create button container
 	const buttonContainer = document.createElement("div");
-	buttonContainer.classList.add("flex", "self-end", "space-x-2");
+	buttonContainer.classList.add("flex", "justify-end", "space-x-2");
 
 	// Create a cancel button
 	const cancelButton = document.createElement("button");
@@ -72,7 +108,8 @@ export function editPost(postData) {
 	textarea.after(saveButton);
 
 	buttonContainer.append(saveButton);
-	container.append(buttonContainer);
+	mediaButtonContainer.append(buttonContainer);
+	container.append(mediaButtonContainer);
 
 	postWrapper.replaceWith(container);
 
@@ -83,10 +120,18 @@ export function editPost(postData) {
 
 	// Add listener to the save button
 	saveButton.addEventListener("click", () => {
+		function handleMediaInput() {
+			if (mediaInput.value) {
+				return { url: mediaInput.value, alt: "Image uploaded by user" };
+			}
+			return { url: null, alt: null };
+		}
+
 		// Update the post
 		updatePost({
 			id: postData.id,
 			body: textarea.value,
+			media: handleMediaInput(),
 		}).then((response) => {
 			// Handle errors
 			if (response.error) {
@@ -94,9 +139,25 @@ export function editPost(postData) {
 			}
 			// Handle success
 			// Replace the input container with the updated post
-			const updatedPost = document.createElement("p");
-			updatedPost.classList.add("mt-3", "dark:text-gray-200", "break-words");
-			updatedPost.textContent = response.data.body;
+			const updatedPost = document.createElement("div");
+			updatedPost.dataset.bodyId = response.data.id;
+			updatedPost.classList.add("flex", "flex-col", "space-y-2");
+
+			const updatedContent = document.createElement("p");
+			updatedContent.classList.add("mt-3", "dark:text-gray-200", "break-words");
+			updatedContent.textContent = response.data.body;
+			updatedContent.dataset.bodyData = response.data.id;
+			updatedPost.append(updatedContent);
+
+			if (response.data.media && response.data.media.url) {
+				const updatedMedia = document.createElement("img");
+				updatedMedia.src = response.data.media.url;
+				updatedMedia.alt = response.data.media.alt;
+				updatedMedia.dataset.mediaData = response.data.id;
+				updatedMedia.classList.add("w-full", "rounded-lg");
+				updatedPost.append(updatedMedia);
+			}
+
 			container.replaceWith(updatedPost);
 
 			// Update the post date

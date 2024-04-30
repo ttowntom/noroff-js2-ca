@@ -2,6 +2,7 @@
 module.exports = {
 	content: ["./**/**/*.html"],
 	darkMode: "class",
+	purge: ["./src/**/*.html", "./src/**/*.mjs"],
 	theme: {
 		extend: {
 			colors: {
