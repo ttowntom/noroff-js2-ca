@@ -124,7 +124,7 @@ export function editPost(postData) {
 			if (mediaInput.value) {
 				return { url: mediaInput.value, alt: "Image uploaded by user" };
 			}
-			return { url: null, alt: null };
+			return null;
 		}
 
 		// Update the post
