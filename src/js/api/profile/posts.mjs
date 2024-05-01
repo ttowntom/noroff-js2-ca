@@ -1,7 +1,7 @@
 import { API_SOCIAL_URL } from "../constants.mjs";
 import { authFetch } from "../authFetch.mjs";
 
-const action = "?_posts=true&_author=true&_reactions=true&_comments=true";
+const action = "?_author=true&_reactions=true&_comments=true";
 
 export async function getPostsFromProfile(username, limit = 100, page = 1) {
 	try {
