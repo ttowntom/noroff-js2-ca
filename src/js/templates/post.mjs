@@ -1,5 +1,7 @@
 import * as postAPI from "../api/posts/index.mjs";
 import { dateTime } from "../handlers/dateTime.mjs";
+import { handleLikeIcon } from "../handlers/handleLikeIcon.mjs";
+import { handleReactions } from "../handlers/handleReactions.mjs";
 import { editPost } from "../handlers/postEdit.mjs";
 
 export function postTemplate(postData) {
@@ -264,6 +266,7 @@ export function postTemplate(postData) {
 	footer.classList.add("flex", "space-x-5", "mt-3");
 	// Create like button
 	const likeButton = document.createElement("button");
+	likeButton.dataset.likeBtn = postData.id;
 	likeButton.classList.add(
 		"flex",
 		"items-center",
@@ -274,14 +277,22 @@ export function postTemplate(postData) {
 	likeButton.ariaLabel = "Like this post";
 	// Create like icon
 	const likeIcon = document.createElement("i");
-	likeIcon.classList.add("fa-regular", "fa-heart");
+	likeIcon.dataset.likeIcon = postData.id;
+	likeIcon.classList.add(`${handleLikeIcon(postData)}`);
+	likeIcon.classList.add("fa-heart");
 	likeButton.append(likeIcon);
 	// Create like count
 	const likeCount = document.createElement("span");
+	likeCount.dataset.likeCount = postData.id;
 	likeCount.classList.add("ms-1");
 	likeCount.textContent = postData._count.reactions;
 	likeButton.append(likeCount);
 	footer.append(likeButton);
+
+	// Add event listener to the like button
+	likeButton.addEventListener("click", () => {
+		handleReactions(postData);
+	});
 
 	// Create comment button
 	const commentButton = document.createElement("button");
