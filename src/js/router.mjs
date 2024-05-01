@@ -125,7 +125,7 @@ export default function router() {
 
 				templates.renderPostTemplate(postData.data, postContainer);
 
-				comments.forEach((commentData) => {
+				comments.reverse().forEach((commentData) => {
 					templates.renderCommentTemplate(commentData, commentsContainer);
 				});
 			}
