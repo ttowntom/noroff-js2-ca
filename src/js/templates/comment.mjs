@@ -1,19 +1,10 @@
 import * as postAPI from "../api/posts/index.mjs";
 import { dateTime } from "../handlers/dateTime.mjs";
-import { handleComment } from "../handlers/handleComment.mjs";
-import { handleLikeIcon } from "../handlers/handleLikeIcon.mjs";
-import { handleReactions } from "../handlers/handleReactions.mjs";
-import { editPost } from "../handlers/postEdit.mjs";
 
-export function postTemplate(postData) {
-	// If there is no post body, use the title as the body
-	if (!postData.body) {
-		postData.body = postData.title;
-	}
-
+export function commentTemplate(postData) {
 	// Create wrapper
-	const post = document.createElement("article");
-	post.classList.add(
+	const comment = document.createElement("article");
+	comment.classList.add(
 		"relative",
 		"flex",
 		"flex-col",
@@ -140,35 +131,6 @@ export function postTemplate(postData) {
 		// Create nav ul
 		const userMenuList = document.createElement("ul");
 		userMenuList.classList.add("space-y-3");
-		// Create edit option
-		const editOption = document.createElement("li");
-		editOption.classList.add("flex", "items-center");
-		// Create edit button
-		const editButton = document.createElement("button");
-		editButton.classList.add("flex", "items-center", "group");
-		// Create edit icon
-		const editIcon = document.createElement("i");
-		editIcon.classList.add(
-			"fa-solid",
-			"fa-pen-to-square",
-			"text-greenPrimary",
-			"group-hover:text-greenHover",
-			"dark:group-hover:text-greenHoverLight"
-		);
-		editButton.append(editIcon);
-		// Create edit text
-		const editText = document.createElement("span");
-		editText.classList.add(
-			"ms-2",
-			"text-greenDark",
-			"dark:text-gray-200",
-			"group-hover:text-greenHover",
-			"dark:group-hover:text-greenHoverLight"
-		);
-		editText.textContent = "Edit post";
-		editButton.append(editText);
-		editOption.append(editButton);
-		userMenuList.append(editOption);
 
 		// Create delete option
 		const deleteOption = document.createElement("li");
@@ -195,23 +157,17 @@ export function postTemplate(postData) {
 			"group-hover:text-red-800",
 			"dark:group-hover:text-red-500"
 		);
-		deleteText.textContent = "Delete post";
+		deleteText.textContent = "Delete comment";
 		deleteButton.append(deleteText);
 		deleteOption.append(deleteButton);
 		userMenuList.append(deleteOption);
 
-		// Add event listener to the edit button
-		editButton.addEventListener("click", () => {
-			// Edit the post
-			editPost(postData);
-		});
-
 		// Add event listener to the delete button
 		deleteButton.addEventListener("click", () => {
-			// Remove post from the DB
-			postAPI.removePost(postData.id);
+			// Remove comment from the DB
+			postAPI.removeComment(postData.postId, postData.id);
 			// Remove post from the DOM
-			post.remove();
+			comment.remove();
 		});
 
 		userPostMenu.append(userMenuList);
@@ -236,105 +192,18 @@ export function postTemplate(postData) {
 		});
 	}
 
-	post.append(header);
+	comment.append(header);
 
-	// Create post link wrapper
-	const postLink = document.createElement("a");
-	postLink.href = `/feed/post/?id=${postData.id}`;
-	postLink.dataset.bodyId = postData.id;
-
-	// Create post content
+	// Create comment content
 	const content = document.createElement("p");
 	content.dataset.bodyData = postData.id;
 	content.classList.add("mt-3", "dark:text-gray-200", "break-words");
 	content.textContent = postData.body;
-	postLink.append(content);
+	comment.append(content);
 
-	// Create post media
-	if (postData.media) {
-		const media = document.createElement("img");
-		media.src = postData.media.url;
-		media.alt = postData.media.alt;
-		media.dataset.mediaData = postData.id;
-		media.classList.add("mt-3", "w-full", "rounded-md");
-		postLink.append(media);
-	}
-
-	post.append(postLink);
-
-	// Create post footer
-	const footer = document.createElement("div");
-	footer.dataset.footerId = postData.id;
-	footer.classList.add("flex", "flex-col", "mt-3");
-
-	// Create actions container
-	const actions = document.createElement("div");
-	actions.classList.add("flex", "space-x-5", "mt-3");
-
-	// Create like button
-	const likeButton = document.createElement("button");
-	likeButton.dataset.likeBtn = postData.id;
-	likeButton.classList.add(
-		"flex",
-		"items-center",
-		"text-gray-400",
-		"hover:text-greenPrimary",
-		"dark:hover:text-greenHoverLight"
-	);
-	likeButton.ariaLabel = "Like this post";
-	// Create like icon
-	const likeIcon = document.createElement("i");
-	likeIcon.dataset.likeIcon = postData.id;
-	likeIcon.classList.add(`${handleLikeIcon(postData)}`);
-	likeIcon.classList.add("fa-heart");
-	likeButton.append(likeIcon);
-	// Create like count
-	const likeCount = document.createElement("span");
-	likeCount.dataset.likeCount = postData.id;
-	likeCount.classList.add("ms-1");
-	likeCount.textContent = postData._count.reactions;
-	likeButton.append(likeCount);
-	actions.append(likeButton);
-
-	// Add event listener to the like button
-	likeButton.addEventListener("click", () => {
-		handleReactions(postData);
-	});
-
-	// Create comment button
-	const commentButton = document.createElement("button");
-	commentButton.classList.add(
-		"flex",
-		"items-center",
-		"text-gray-400",
-		"hover:text-greenPrimary",
-		"dark:hover:text-greenHoverLight"
-	);
-	commentButton.ariaLabel = "Comment on this post";
-	// Create comment icon
-	const commentIcon = document.createElement("i");
-	commentIcon.classList.add("fa-regular", "fa-comment");
-	commentButton.append(commentIcon);
-	// Create comment count
-	const commentCount = document.createElement("span");
-	commentCount.dataset.commentCount = postData.id;
-	commentCount.classList.add("ms-1");
-	commentCount.textContent = postData._count.comments;
-	commentButton.append(commentCount);
-	actions.append(commentButton);
-
-	footer.append(actions);
-
-	// Add event listener to the comment button
-	commentButton.addEventListener("click", () => {
-		handleComment(postData);
-	});
-
-	post.append(footer);
-
-	return post;
+	return comment;
 }
 
-export function renderPostTemplate(postData, parent) {
-	parent.append(postTemplate(postData));
+export function renderCommentTemplate(postData, parent) {
+	parent.append(commentTemplate(postData));
 }

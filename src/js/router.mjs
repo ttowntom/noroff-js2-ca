@@ -115,11 +115,19 @@ export default function router() {
 
 			const postId = urlParams.get("id");
 
-			// Render post
+			// Render post with comments
 			async function renderPost() {
 				const postContainer = document.querySelector("#post");
 				const postData = await post.getPost(postId);
+
+				const commentsContainer = document.querySelector("#comments");
+				const comments = postData.data.comments;
+
 				templates.renderPostTemplate(postData.data, postContainer);
+
+				comments.reverse().forEach((commentData) => {
+					templates.renderCommentTemplate(commentData, commentsContainer);
+				});
 			}
 			renderPost();
 
