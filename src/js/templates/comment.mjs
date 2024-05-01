@@ -1,18 +1,10 @@
 import * as postAPI from "../api/posts/index.mjs";
 import { dateTime } from "../handlers/dateTime.mjs";
-import { handleLikeIcon } from "../handlers/handleLikeIcon.mjs";
-import { handleReactions } from "../handlers/handleReactions.mjs";
-import { editPost } from "../handlers/postEdit.mjs";
 
 export function commentTemplate(postData) {
-	// If there is no post body, use the title as the body
-	if (!postData.body) {
-		postData.body = postData.title;
-	}
-
 	// Create wrapper
-	const post = document.createElement("article");
-	post.classList.add(
+	const comment = document.createElement("article");
+	comment.classList.add(
 		"relative",
 		"flex",
 		"flex-col",
@@ -172,10 +164,10 @@ export function commentTemplate(postData) {
 
 		// Add event listener to the delete button
 		deleteButton.addEventListener("click", () => {
-			// Remove post from the DB
-			postAPI.removePost(postData.id);
+			// Remove comment from the DB
+			postAPI.removeComment(postData.postId, postData.id);
 			// Remove post from the DOM
-			post.remove();
+			comment.remove();
 		});
 
 		userPostMenu.append(userMenuList);
@@ -200,16 +192,16 @@ export function commentTemplate(postData) {
 		});
 	}
 
-	post.append(header);
+	comment.append(header);
 
-	// Create post content
+	// Create comment content
 	const content = document.createElement("p");
 	content.dataset.bodyData = postData.id;
 	content.classList.add("mt-3", "dark:text-gray-200", "break-words");
 	content.textContent = postData.body;
-	post.append(content);
+	comment.append(content);
 
-	return post;
+	return comment;
 }
 
 export function renderCommentTemplate(postData, parent) {

@@ -7,6 +7,7 @@ export function handleComment(postData) {
 	const commentCount = postFooter.querySelector(
 		`[data-comment-count="${postData.id}"]`
 	);
+	const commentSection = document.querySelector(`#comments`);
 
 	// URL Parameters
 	const urlParams = new URLSearchParams(window.location.search);
