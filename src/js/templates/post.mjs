@@ -1,5 +1,6 @@
 import * as postAPI from "../api/posts/index.mjs";
 import { dateTime } from "../handlers/dateTime.mjs";
+import { handleComment } from "../handlers/handleComment.mjs";
 import { handleLikeIcon } from "../handlers/handleLikeIcon.mjs";
 import { handleReactions } from "../handlers/handleReactions.mjs";
 import { editPost } from "../handlers/postEdit.mjs";
@@ -263,7 +264,13 @@ export function postTemplate(postData) {
 
 	// Create post footer
 	const footer = document.createElement("div");
-	footer.classList.add("flex", "space-x-5", "mt-3");
+	footer.dataset.footerId = postData.id;
+	footer.classList.add("flex", "flex-col", "mt-3");
+
+	// Create actions container
+	const actions = document.createElement("div");
+	actions.classList.add("flex", "space-x-5", "mt-3");
+
 	// Create like button
 	const likeButton = document.createElement("button");
 	likeButton.dataset.likeBtn = postData.id;
@@ -287,7 +294,7 @@ export function postTemplate(postData) {
 	likeCount.classList.add("ms-1");
 	likeCount.textContent = postData._count.reactions;
 	likeButton.append(likeCount);
-	footer.append(likeButton);
+	actions.append(likeButton);
 
 	// Add event listener to the like button
 	likeButton.addEventListener("click", () => {
@@ -310,10 +317,18 @@ export function postTemplate(postData) {
 	commentButton.append(commentIcon);
 	// Create comment count
 	const commentCount = document.createElement("span");
+	commentCount.dataset.commentCount = postData.id;
 	commentCount.classList.add("ms-1");
 	commentCount.textContent = postData._count.comments;
 	commentButton.append(commentCount);
-	footer.append(commentButton);
+	actions.append(commentButton);
+
+	footer.append(actions);
+
+	// Add event listener to the comment button
+	commentButton.addEventListener("click", () => {
+		handleComment(postData);
+	});
 
 	post.append(footer);
 
