@@ -16,6 +16,7 @@ export function setSearchFormListener() {
 			const form = e.target;
 			const formData = new FormData(form);
 			const search = Object.fromEntries(formData.entries());
+			const filter = document.querySelector(`#filter`);
 
 			try {
 				let isLastPage = true;
@@ -38,6 +39,11 @@ export function setSearchFormListener() {
 						posts.data.forEach((postData) => {
 							templates.renderPostTemplate(postData, feedContainer);
 						});
+
+						// Remove filter
+						if (filter) {
+							filter.remove();
+						}
 
 						// Remove error, if any
 						if (!loadErrorContainer.classList.contains("hidden")) {
