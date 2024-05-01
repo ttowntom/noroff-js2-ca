@@ -115,27 +115,21 @@ export default function router() {
 
 			const postId = urlParams.get("id");
 
-			// Render post
+			// Render post with comments
 			async function renderPost() {
 				const postContainer = document.querySelector("#post");
 				const postData = await post.getPost(postId);
-				templates.renderPostTemplate(postData.data, postContainer);
-			}
-			renderPost();
 
-			// Render comments
-			async function renderComments() {
 				const commentsContainer = document.querySelector("#comments");
-				const data = await post.getPost(postId);
-				const comments = data.data.comments;
+				const comments = postData.data.comments;
 
-				console.log(comments);
+				templates.renderPostTemplate(postData.data, postContainer);
 
 				comments.forEach((commentData) => {
 					templates.renderCommentTemplate(commentData, commentsContainer);
 				});
 			}
-			renderComments();
+			renderPost();
 
 			// Render user profile image
 			renderProfileImage();
