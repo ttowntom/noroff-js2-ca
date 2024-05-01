@@ -12,6 +12,9 @@ export function handleLikeIcon(postData) {
 
 	// Find user in .reactors and add solid heart icon
 	reactions.forEach((reaction) => {
+		if (!reaction.reactors) {
+			return;
+		}
 		if (reaction.symbol === "❤️") {
 			reaction.reactors.includes(user)
 				? (iconClass = "fa-solid")
