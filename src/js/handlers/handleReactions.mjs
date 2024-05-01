@@ -8,7 +8,6 @@ export async function handleReactions(postData) {
 
 	try {
 		const data = await updateReaction(postData);
-		console.log(data);
 
 		likeCount.textContent = data.data.reactions.length;
 		likeIcon.classList.toggle("fa-regular");

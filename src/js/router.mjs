@@ -123,6 +123,20 @@ export default function router() {
 			}
 			renderPost();
 
+			// Render comments
+			async function renderComments() {
+				const commentsContainer = document.querySelector("#comments");
+				const data = await post.getPost(postId);
+				const comments = data.data.comments;
+
+				console.log(comments);
+
+				comments.forEach((commentData) => {
+					templates.renderCommentTemplate(commentData, commentsContainer);
+				});
+			}
+			renderComments();
+
 			// Render user profile image
 			renderProfileImage();
 
