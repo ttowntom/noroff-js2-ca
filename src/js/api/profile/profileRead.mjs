@@ -1,7 +1,8 @@
 import { API_SOCIAL_URL } from "../constants.mjs";
 import { authFetch } from "../authFetch.mjs";
 
-const action = "?_following=true&_followers=true";
+const action =
+	"?_following=true&_followers=true&_reactions=true&_comments=true";
 
 export async function getProfiles(limit = 100, page = 1) {
 	try {
