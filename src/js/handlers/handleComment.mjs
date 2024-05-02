@@ -1,6 +1,6 @@
 import { createComment } from "../api/posts/createComment.mjs";
 import { commentFormTemplate } from "../templates/commentForm.mjs";
-import { alertContainerTemplate } from "../templates/alertContainer.mjs";
+import { alertContainerTemplate } from "../helpers/alertContainer.mjs";
 
 export function handleComment(postData) {
 	// Grab document elements
