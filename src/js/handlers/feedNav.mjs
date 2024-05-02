@@ -1,5 +1,6 @@
 import { getPostsFromFollowing } from "../api/posts/postsFromFollowing.mjs";
 import { getPosts } from "../api/posts/read.mjs";
+import { feedNavClasses } from "../helpers/feedNavClasses.mjs";
 import { renderPostTemplate } from "../templates/post.mjs";
 
 const timelineLi = document.querySelector("#navTimelineLi");
@@ -20,28 +21,8 @@ export function feedNavTimeline() {
 			});
 		});
 
-		// Set active class
-		timelineLi.classList.add("border-b-4", "border-greenPrimary");
-		timelineLi.classList.remove(
-			"hover:border-greenHover",
-			"dark:hover:border-greenHoverLight"
-		);
-		followingLi.classList.remove("border-b-4", "border-greenPrimary");
-		followingLi.classList.add(
-			"hover:border-b-4",
-			"hover:border-greenHover",
-			"dark:hover:border-greenHoverLight"
-		);
-		btnFollowing.classList.remove();
-		btnFollowing.classList.add(
-			"hover:text-greenHover",
-			"dark:hover:text-greenHoverLight"
-		);
-		btnTimeline.classList.add();
-		btnTimeline.classList.remove(
-			"hover:text-greenHover",
-			"dark:hover:text-greenHoverLight"
-		);
+		// Change classes
+		feedNavClasses(timelineLi, btnTimeline, followingLi, btnFollowing);
 	});
 }
 
@@ -57,27 +38,7 @@ export async function feedNavFollowing() {
 			renderPostTemplate(postData, feed);
 		});
 
-		// Set active class
-		followingLi.classList.add("border-b-4", "border-greenPrimary");
-		followingLi.classList.remove(
-			"hover:border-greenHover",
-			"dark:hover:border-greenHoverLight"
-		);
-		timelineLi.classList.remove("border-b-4", "border-greenPrimary");
-		timelineLi.classList.add(
-			"hover:border-b-4",
-			"hover:border-greenHover",
-			"dark:hover:border-greenHoverLight"
-		);
-		btnTimeline.classList.remove();
-		btnTimeline.classList.add(
-			"hover:text-greenHover",
-			"dark:hover:text-greenHoverLight"
-		);
-		btnFollowing.classList.add();
-		btnFollowing.classList.remove(
-			"hover:text-greenHover",
-			"dark:hover:text-greenHoverLight"
-		);
+		// Change classes
+		feedNavClasses(followingLi, btnFollowing, timelineLi, btnTimeline);
 	});
 }
