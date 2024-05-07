@@ -28,6 +28,6 @@ export async function handleReactions(postData) {
 		likeIcon.classList.toggle("fa-regular");
 		likeIcon.classList.add(handleLikeIcon(data.data));
 	} catch (error) {
-		console.error("Error updating reaction:", error);
+		throw new Error(error);
 	}
 }
