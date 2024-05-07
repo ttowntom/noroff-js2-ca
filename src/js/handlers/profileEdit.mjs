@@ -1,4 +1,5 @@
 import { updateProfile } from "../api/profile/update.mjs";
+import { alertContainerTemplate } from "../helpers/alertContainer.mjs";
 import { editProfileFormTemplate } from "../templates/editProfileForm.mjs";
 
 export function editProfile(profileData) {
@@ -33,6 +34,7 @@ export function editProfile(profileData) {
 		}).then((response) => {
 			// Handle errors
 			if (response.error) {
+				container.append(alertContainerTemplate("error", response.error));
 				throw new Error(response.error);
 			}
 
