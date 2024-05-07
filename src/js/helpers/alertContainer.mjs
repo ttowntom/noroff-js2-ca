@@ -1,3 +1,14 @@
+/**
+ * Creates a container for an alert message
+ * @param {string} mode - The mode of the alert message (error, success, info, warning)
+ * @param {string} msg - The message to display in the alert container
+ * @returns {HTMLDivElement} - The alert container element
+ * ``` js
+ * const alertContainer = alertContainerTemplate("error", "This is an error message");
+ * document.body.appendChild(alertContainer);
+ * ```
+ */
+
 export function alertContainerTemplate(mode, msg) {
 	// Set mode variables
 	let bgColor = "";

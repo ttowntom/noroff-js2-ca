@@ -1,3 +1,20 @@
+/**
+ * Styles feed navigation elements based on active/inactive state
+ * @param {HTMLLIElement} activeLi - The active list item
+ * @param {HTMLButtonElement} activeBtn - The active button
+ * @param {HTMLLIElement} inactiveLi - The inactive list item
+ * @param {HTMLButtonElement} inactiveBtn - The inactive button
+ * ``` js
+ * const activeLi = document.querySelector(".active-li");
+ * const activeBtn = document.querySelector(".active-btn");
+ * const inactiveLi = document.querySelector(".inactive-li");
+ * const inactiveBtn = document.querySelector(".inactive-btn");
+ * feedNavClasses(activeLi, activeBtn, inactiveLi, inactiveBtn);
+ * // activeLi and activeBtn will have green styles
+ * // inactiveLi and inactiveBtn will have default styles
+ * ```
+ */
+
 export function feedNavClasses(activeLi, activeBtn, inactiveLi, inactiveBtn) {
 	// Set active class
 	// Add styles to li
