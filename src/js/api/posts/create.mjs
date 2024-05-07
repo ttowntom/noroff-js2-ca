@@ -2,6 +2,7 @@ import { API_SOCIAL_URL } from "../constants.mjs";
 import { authFetch } from "../authFetch.mjs";
 import { getPost } from "./read.mjs";
 import { postTemplate } from "../../templates/post.mjs";
+import { alertContainerTemplate } from "../../helpers/alertContainer.mjs";
 
 const errContainer = document.querySelector(`#postErrorContainer`);
 const errMsg = document.querySelector(`#postError`);
