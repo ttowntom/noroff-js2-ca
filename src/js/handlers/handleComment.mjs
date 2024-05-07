@@ -35,7 +35,6 @@ export function handleComment(postData) {
 		}).then((response) => {
 			// Handle errors
 			if (response.error) {
-				console.log("error");
 				// Render error message
 				postFooter.append(
 					alertContainerTemplate(
