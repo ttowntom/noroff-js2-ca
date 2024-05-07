@@ -14,8 +14,7 @@ export function handleLikeIcon(postData) {
 	reactions.forEach((reaction) => {
 		if (!reaction.reactors) {
 			return;
-		}
-		if (reaction.symbol === "❤️") {
+		} else if (reaction.symbol === "❤️") {
 			reaction.reactors.includes(user)
 				? (iconClass = "fa-solid")
 				: (iconClass = "fa-regular");
