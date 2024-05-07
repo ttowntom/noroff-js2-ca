@@ -10,6 +10,8 @@ This is a front-end client for a social media platform called WhispR. The websit
 
 The full assignment description can be found [here](https://content.noroff.dev/javascript-2/ca.html).
 
+The task board for the project can be found [here](https://sharing.clickup.com/9005068557/l/h/5-90171348140-1/2dd0e911b1a4cc9).
+
 ## Features
 
 - Register a new user (if they pass email criteria)
