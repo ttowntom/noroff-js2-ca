@@ -9,12 +9,24 @@ export async function handleReactions(postData) {
 
 	try {
 		const data = await updateReaction(postData);
-		console.log("Reaction updated:", data.data.reactions);
-		handleLikeIcon(data.data);
 
-		likeCount.textContent = data.data.reactions.length;
-		// likeIcon.classList.toggle("fa-regular");
-		// likeIcon.classList.toggle("fa-solid");
+		// Find likes
+		const likes = {};
+		if (data.data.reactions) {
+			data.data.reactions.forEach((reaction) => {
+				if (reaction.symbol === "❤️") {
+					likes.count = reaction.count;
+					likes.reactors = reaction.reactors;
+				}
+			});
+		}
+
+		// Set like count
+		likeCount.textContent = likes.count || 0;
+
+		// Set like icon
+		likeIcon.classList.toggle("fa-regular");
+		likeIcon.classList.add(handleLikeIcon(data.data));
 	} catch (error) {
 		console.error("Error updating reaction:", error);
 	}
